@@ -1,1 +1,2 @@
 # Trabalho-de-base-de-dados
+É UM SISTEMA DE GESTÃO DE UM SALÃO DENOMINADO SHOW-OFF
