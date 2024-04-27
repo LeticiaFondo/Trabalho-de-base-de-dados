@@ -2,7 +2,7 @@
   if(isset($_POST["btnEntrar"]))
   {
 
-    
+    //include_once("./Front-end/html/dashboard.php");
     $conexao= new mysqli("Localhost","root","","SHOWOFF");
     if ($conexao->connect_errno) {
         echo "Falha na conexão: " . $conexao->connect_error;
@@ -27,6 +27,7 @@
         if ($result->num_rows > 0) {
             // Há registros correspondentes
             echo "Registros encontrados";
+            header('location: dashboard.php');
             // Faça o que precisar com os registros aqui
         } else {
             // Não há registros correspondentes
@@ -53,7 +54,7 @@
     <p id="lblShowoff">SHOW-OFF</p>
     <div class="containerFormulario">
         <form class="containerFormulario1" action="index.php" method="post">
-              <input type="text" placeholder="Introduza o seu Nome" class="inputsLogin" id="idInputNome" name="campoNome">
+              <input type="text" placeholder="Introduza o seu Contacto" class="inputsLogin" id="idInputNome" name="campoNome">
               <input type="text" placeholder="Introduza a sua Senha" class="inputsLogin" id="idInputSenha" name="campoSenha">
               <p id="mensagem_erro"></p>
              <button type="submit" id="btnEntrar"   value="btnEntrar" name="btnEntrar">Entrar</button>
