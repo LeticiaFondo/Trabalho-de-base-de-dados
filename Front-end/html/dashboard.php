@@ -1,6 +1,6 @@
 <?php
-include(__DIR__ . "/../conexao.php");
-
+//nclude(__DIR__ . "/../conexao.php");
+/*
 session_start();
 
 // Consultar todos os gerentes inicialmente
@@ -40,7 +40,7 @@ $sql = "SELECT id_gerente, Nome_G, Apelido_G, Contacto_G, Senha_G FROM gerente";
 $result = $conn->query($sql);
 
 $row = mysqli_fetch_array($result);
-
+*/
 ?>
 
 
