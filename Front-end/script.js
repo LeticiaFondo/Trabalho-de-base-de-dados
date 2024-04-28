@@ -19,7 +19,7 @@ const corteData = [
     { tipo: "Corte Feminino", manicurePedicure: "Pedicure", preco: "$25", tempo: "45 minutos" }
 ];
 
-// Função para carregar os dados do gerente na tabela
+// Função para carregar os dados do gerente na TABELA
 function carregarGerentes() {
     const tabelaGerente = document.getElementById("gerente-table");
     tabelaGerente.innerHTML = ""; // Limpar a tabela antes de adicionar novos dados
