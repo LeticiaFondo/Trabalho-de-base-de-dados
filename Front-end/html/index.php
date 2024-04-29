@@ -27,7 +27,7 @@
         if ($result->num_rows > 0) {
             // Há registros correspondentes
             echo "Registros encontrados";
-            header('location: dashboard.php');
+            header('location: dash.php');
             // Faça o que precisar com os registros aqui
         } else {
             // Não há registros correspondentes

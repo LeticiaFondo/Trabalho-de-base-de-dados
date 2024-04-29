@@ -9,10 +9,7 @@ const funcionarioData = [
     { nome: "Jane", apelido: "Doe", email: "jane@example.com", tipo: "barbeiro" }
 ];
 
-const clienteData = [
-    { nome: "Carlos", apelido: "Silva", tipoCorte: "Corte Masculino", manicurePedicure: "Manicure", atendente: "John", valor: "$20", tempo: "1 hora" },
-    { nome: "Ana", apelido: "Santos", tipoCorte: "Corte Feminino", manicurePedicure: "Pedicure", atendente: "Jane", valor: "$30", tempo: "1 hora e 30 minutos" }
-];
+ 
 
 const corteData = [
     { tipo: "Corte Masculino", manicurePedicure: "Manicure", preco: "$15", tempo: "30 minutos" },
@@ -67,28 +64,7 @@ function carregarFuncionarios() {
 }
 
 // Função para carregar os dados dos clientes na tabela
-function carregarClientes() {
-    const tabelaClientes = document.getElementById("cliente-table").getElementsByTagName('tbody')[0];
-    tabelaClientes.innerHTML = ""; // Limpar a tabela antes de adicionar novos dados
-
-    clienteData.forEach(cliente => {
-        const newRow = document.createElement("tr");
-        newRow.innerHTML = `
-            <td>${cliente.nome}</td>
-            <td>${cliente.apelido}</td>
-            <td>${cliente.tipoCorte}</td>
-            <td>${cliente.manicurePedicure}</td>
-            <td>${cliente.atendente}</td>
-            <td>${cliente.valor}</td>
-            <td>${cliente.tempo}</td>
-            <td>
-                <button class="action-button" onclick="editarCliente()"><i class="fas fa-edit"></i> Editar</button>
-                <button class="action-button" onclick="apagarCliente()"><i class="fas fa-trash-alt"></i> Apagar</button>
-            </td>
-        `;
-        tabelaClientes.appendChild(newRow);
-    });
-}
+ 
 
 // Função para carregar os dados dos cortes na tabela
 function carregarCortes() {
@@ -113,16 +89,16 @@ function carregarCortes() {
 
 // Função para mostrar a tabela de funcionários quando clicar na opção no sidebar
 function mostrarFuncionarios() {
-    const tabelaFuncionarios = document.getElementById("funcionario-table");
-    tabelaFuncionarios.classList.remove("hidden");
-    carregarFuncionarios(); // Carregar os dados dos funcionários quando a tabela é mostrada
+    // Carregar os dados dos funcionários quando a tabela é mostrada
+    let containerFuncionarios = document.getElementById('funcionario-table');
+    containerFuncionarios.classList.remove('hidden');
 }
 
 // Função para mostrar a tabela de clientes quando clicar na opção no sidebar
 function mostrarClientes() {
     const tabelaClientes = document.getElementById("cliente-table");
     tabelaClientes.classList.remove("hidden");
-    carregarClientes(); // Carregar os dados dos clientes quando a tabela é mostrada
+  
 }
 
 // Função para mostrar a tabela de cortes quando clicar na opção no sidebar
