@@ -51,7 +51,9 @@ table {
     border-radius: 10px;
     overflow: hidden;
 }
-
+#tblGerente{
+    position: relative;
+}
 th, td {
     padding: 8px;
     text-align: left;
@@ -115,4 +117,55 @@ tr:hover {
 
 .sidebar-text {
     color: white; 
+}
+
+
+/* PUPOS */
+.containerAlterar{
+    background-color: #ccc;
+    width: 40%;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5%;
+    margin-top: -30px;
+    border-radius: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.containerFormAlterar{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputsFormAlterar{
+    width: 160%;
+    height: 5vh;
+    border-radius: 10px;
+    border: none;
+}
+
+.btnCorAzul{
+    background-color: #1F1CB3;
+    color: white;
+    border: none;
+    width: 130%;
+    height: 5vh;
+    border-radius: 10px;
+}
+
+.btnCorVermelho{
+    background-color: rgb(167, 21, 21);
+    color: white;
+    border: none;
+    width: 130%;
+    height: 5vh;
+    border-radius: 10px;
 }
