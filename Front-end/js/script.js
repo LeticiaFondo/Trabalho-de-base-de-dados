@@ -19,12 +19,7 @@ function mostrarCortes() {
   
 }
 
-// Função para mostrar a div de alterar os  gerentes
-
-function fecharDivAlterar(){
-    document.getElementById('containerAlterar').style.display('none')
  
-}
  
 
  
