@@ -4,51 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Servicos</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-image: linear-gradient(#6265b3, rgb(19, 18, 18));
-            overflow: hidden;
-        }
-        form {
-            width: 300px;
-            margin: 0 auto; 
-            margin-top: 10%;
-            margin-bottom: 10%;
-            border-radius: 10px;
-            padding: 20px;
-            background-color: #f2f2f2;
-        }
-        input[type="text"],
-        input[type="number"] {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
-            border-radius: 5px; 
-            border: none;
-            outline: none; 
-        }
-        input[type="submit"] {
-            background-color: #1F1CB3;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        input[type="submit"]:hover {
-            background-color: #141095;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/estiloFormularioServicos.css">
 </head>
 <body>
+  
+    <p>CADASTRO SERVIÇO</p>
+    
     <form action="/submit" method="post">
         <input type="text" id="servico" name="servico" placeholder="Serviço" required>
         <input type="number" id="tempo" name="tempo" placeholder="Tempo (minutos)" required>
         <input type="number" id="preco" name="preco" placeholder="Preço" required>
-        <input type="submit" value="Enviar">
+        <input type="submit" value="Enviar" name="btnCadastrar">
     </form>
 </body>
 </html>
