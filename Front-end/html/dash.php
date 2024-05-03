@@ -9,9 +9,207 @@
     $sql = "SELECT * FROM gerente order by id_gerente "; // Corrigindo a consulta SQL
     $result = $conexao->query($sql);
 
+   
+    if(isset($_POST["btnAlterarGerente"]))
+    {
+ 
+        
+        if(!empty($_POST["idGerente"]) && !empty($_POST["inputNome"]) && !empty($_POST["inputApelido"]) && !empty($_POST["inputContacto"]) && !empty($_POST["inputSenha"]))
+        {
+            //Evitar o sql injection
+            $idGerente = mysqli_real_escape_string($conexao, $_POST['idGerente']);
+            $nome = mysqli_real_escape_string($conexao, $_POST['inputNome']);
+            $apelido = mysqli_real_escape_string($conexao, $_POST['inputApelido']);
+            $contacto = mysqli_real_escape_string($conexao, $_POST['inputContacto']);
+            $senha = mysqli_real_escape_string($conexao, $_POST['inputSenha']);
+
+            $sql = "UPDATE gerente SET Nome_G='$nome', Apelido_G='$apelido', Contacto_G='$contacto', Senha_G='$senha' WHERE id_gerente=$idGerente";
+
+            if(mysqli_query($conexao, $sql)){
+               
+                  // Certifique-se de sair do script para evitar que o código seja executado após o redirecionamento
+                  header('Location: dash.php');
+            } else{
+               // echo "ERRO: Não foi possível executar $sql. " . mysqli_error($conexao);
+            }
+    
+         
+           
+        }   
+       
+
+    }
+
+   
+        if(isset($_POST["btnApagarGerente"])) {
+            if(isset($_POST['idGerente']))
+            {
+                $idGerente = mysqli_real_escape_string($conexao, $_POST['idGerente']);
+
+                 // Query SQL para excluir o gerente com o ID fornecido
+                 $sql = "DELETE FROM gerente WHERE id_gerente = '$idGerente'";
+
+                  // Executar a query de exclusão
+                 if(mysqli_query($conexao, $sql))
+                {
+                    //echo "Gerente excluído com sucesso.";
+                } else {
+                    //echo "ERRO: Não foi possível excluir o gerente. " . mysqli_error($conexao);
+                }
+
+                header('location: dash.php');
+
+            }
+        }
+ 
+
+
+
+    //----------------------CLIENTE-------------------
+
     $consultaClientes = "SELECT * FROM clientes order by Nome_C";
     $resultClientes = $conexao->query($consultaClientes);
 
+    if(isset($_POST["btnApagarClientes"]))
+    {
+       
+        if(isset($_POST['id_Clientes']))
+        {
+
+            $idClientes = mysqli_real_escape_string($conexao, $_POST['id_Clientes']);
+
+            // Query SQL para excluir o gerente com o ID fornecido
+            $sql = "DELETE FROM clientes WHERE id_Clientes = '$idClientes'";
+
+             // Executar a query de exclusão
+            if(mysqli_query($conexao, $sql))
+           {  
+               header('location: dash.php');
+               //echo "Gerente excluído com sucesso.";
+           } else {
+               //echo "ERRO: Não foi possível excluir o gerente. " . mysqli_error($conexao);
+           }
+
+        
+
+
+        }
+    }
+    
+
+
+    //--------------------FUNCIONARIOS--------------
+    $consultaFuncionarios = "SELECT * FROM funcionarios order by  id_Funcionarios";
+    $resultFuncionarios= $conexao->query($consultaFuncionarios);
+
+    if(isset($_POST["btnAlterarFuncionario"])) {
+        // Verifique se os campos necessários foram enviados
+        if(isset($_POST['inputID'], $_POST['inputNome'], $_POST['inputApelido'], $_POST['inputTipo'])) {
+            // Recupere os valores dos campos do formulário
+            $idFuncionario = mysqli_real_escape_string($conexao, $_POST['inputID']);
+            $nome = mysqli_real_escape_string($conexao, $_POST['inputNome']);
+            $apelido = mysqli_real_escape_string($conexao, $_POST['inputApelido']);
+            $tipo = mysqli_real_escape_string($conexao, $_POST['inputTipo']);
+    
+            // Execute a lógica para atualizar os dados do funcionário no banco de dados
+            // Exemplo de consulta SQL para atualizar os dados do funcionário
+            $sql = "UPDATE funcionarios SET Nome_F = '$nome', Apelido_F = '$apelido', tipo_F = '$tipo' WHERE id_Funcionarios = $idFuncionario";
+    
+            if(mysqli_query($conexao, $sql)) {
+                header('location: dash.php');
+                // Dados do funcionário atualizados com sucesso
+                // Você pode adicionar uma mensagem de sucesso aqui, se desejar
+            } else {
+                echo "ERRO: Não foi possível atualizar os dados do funcionário. " . mysqli_error($conexao);
+            }
+        } else {
+            // Campos necessários não enviados
+            echo "ERRO: Por favor, preencha todos os campos obrigatórios.";
+        }
+    }
+
+
+    if(isset($_POST["btnApagarFuncionarios"])) {
+         
+        if(isset($_POST['idFuncionarios']))
+        {
+            $idFunc = mysqli_real_escape_string($conexao, $_POST['idFuncionarios']);
+
+             // Query SQL para excluir o gerente com o ID fornecido
+             $sql = "DELETE FROM funcionarios WHERE id_Funcionarios = '$idFunc'";
+
+              // Executar a query de exclusão
+             if(mysqli_query($conexao, $sql))
+            {
+                //echo "Gerente excluído com sucesso.";
+            } else {
+                //echo "ERRO: Não foi possível excluir o gerente. " . mysqli_error($conexao);
+            }
+
+            header('location: dash.php');
+
+        }
+    }
+
+     
+    
+
+
+    //----------------Serviços-------------------
+    $consultaServicos = "SELECT * FROM servicos order by  id_Servicos";
+    $resultServicos= $conexao->query($consultaServicos);
+
+    if(isset($_POST["btnAlterarServico"])) {
+        // Verifica se todos os campos foram enviados
+        if(isset($_POST['inputIDS']) && isset($_POST['inputServico']) && isset($_POST['inputPreco']) && isset($_POST['inputTempo'])) {
+            
+            // Captura os valores dos campos do formulário
+            $idServico = mysqli_real_escape_string($conexao, $_POST['inputIDS']);
+            $novoServico = mysqli_real_escape_string($conexao, $_POST['inputServico']);
+            $novoPreco = mysqli_real_escape_string($conexao, $_POST['inputPreco']);
+            $novoTempo = mysqli_real_escape_string($conexao, $_POST['inputTempo']);
+            
+            // Query SQL para atualizar o serviço no banco de dados
+            $sql = "UPDATE servicos SET nome_S = '$novoServico', preco = '$novoPreco', tempo = '$novoTempo' WHERE id_Servicos = '$idServico'";
+    
+            // Executar a query de atualização
+            if(mysqli_query($conexao, $sql)) {
+                header('location: dash.php');
+            } else {
+                echo "ERRO: Não foi possível atualizar o serviço. " . mysqli_error($conexao);
+            }
+        } else {
+            echo "Por favor, preencha todos os campos do formulário.";
+        }
+    }
+
+
+    if(isset($_POST["btnApagarServico"]))
+    {
+
+        if(isset($_POST['idServicos']))
+        {
+
+            $idSer = mysqli_real_escape_string($conexao, $_POST['idServicos']);
+
+            // Query SQL para excluir o gerente com o ID fornecido
+            $sql = "DELETE FROM servicos WHERE id_Servicos = '$idSer'";
+
+             // Executar a query de exclusão
+            if(mysqli_query($conexao, $sql))
+           {
+               //echo "Gerente excluído com sucesso.";
+           } else {
+               //echo "ERRO: Não foi possível excluir o gerente. " . mysqli_error($conexao);
+           }
+
+           header('location: dash.php');
+          
+        }
+       
+    }
+
+    
  
 
 $conexao->close();
@@ -66,7 +264,7 @@ $conexao->close();
        .containerAlterar{
     background-color: #ccc;
     width: 40%;
-    height: 55vh;
+    height: 59vh;
     display: none;
     flex-direction: column;
     align-items: center;
@@ -143,7 +341,25 @@ a{
     text-decoration: none;
 }
 
-   </style>
+.btnOperacoes{
+    width: 68px;
+    height: 4vh;
+    color:white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+#btnEditar{
+    background-color: blue;
+}
+
+#btnApagar{
+    background-color: red;
+}
+
+</style>
 
  
 </head>
@@ -164,8 +380,11 @@ a{
     <div id="content">
         
         <h2 id="gerente">Gerente</h2>
-       <div>
-           <button class="btnCorInserir" onclick="abrirDivAlterarGerente()">Inserir Gerente</button>
+       <div class="containerGerente">
+         <a href="../formularios/gerente.php">
+             <button class="btnCorInserir">Inserir Gerente</button>
+         </a>
+          
             <table class="table" id="tblGerente">
                     <thead>
                         <tr>
@@ -189,11 +408,15 @@ a{
                                 echo "<td>".$userData['Contacto_G']."</td>";
                                 echo "<td>".$userData['Senha_G']."</td>";
                                 echo "<td>
-                                  <a class='btn btn-primary' href='#'>
-                                <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pen-fill' viewBox='0 0 16 16' onclick='abrirDivAlterarGerente()'>
-                                    <path d='m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001'/>
-                                </svg>
-                                </a>
+                                <button class='btnOperacoes' id='btnEditar' onclick='abrirDivAlterarGerente(\"".$userData['id_gerente']."\", \"".$userData['Nome_G']."\", \"".$userData['Apelido_G']."\", \"".$userData['Contacto_G']."\", \"".$userData['Senha_G']."\")'>
+                                 Editar</button>
+
+                                 <form action='./dash.php' method='post' style='display:inline-block;'>
+                                    <input type='hidden' name='idGerente' value='".$userData['id_gerente']."'>
+                                    <button type='submit' id='btnApagar' class='btnOperacoes' name='btnApagarGerente'>
+                                        Apagar
+                                    </button>
+                                </form>
                               </td>";
                               
                                 echo "</tr>";
@@ -207,29 +430,44 @@ a{
       
         <div id="funcionario-table" class="hidden">
             <h2 id="funcionario">Funcionários</h2>
-            <button class="btnCorInserir" onclick="abrirDivAlterarFuncionario()">Inserir Funcionario</button>
+            <a href="../formularios/funcionarios.php">
+                <button class="btnCorInserir">Inserir Funcionario</button>
+            </a>
+            
             <table>
                 <thead>
                     <tr>
+                        <th>id</th>
                         <th>Nome</th>
                         <th>Apelido</th>
-                        <th>Email</th>
                         <th>Tipo</th>
                         <th>Operacões</th>
                     </tr>
                 </thead>
                 <tbody>
-                   <?php
-                      echo "<tr>";
-                      echo "<td>
-                      <a class='btn btn-primary' href='#'>
-                    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pen-fill' viewBox='0 0 16 16' onclick='abrirDivAlterarFuncionario()'>
-                        <path d='m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001'/>
-                    </svg>
-                    </a>
-                  </td>";
-                      echo "</tr>";
-                   ?>
+                <?php
+                    while($userData2=mysqli_fetch_assoc($resultFuncionarios))
+                    {
+                        echo "<tr>";
+                        echo "<td>".$userData2['id_Funcionarios']."</td>";
+                        echo "<td>".$userData2['Nome_F']."</td>";
+                        echo "<td>".$userData2['Apelido_F']."</td>";
+                        echo "<td>".$userData2['tipo_F']."</td>";
+                        echo "<td>
+                        <button class='btnOperacoes' id='btnEditar' onclick='abrirDivAlterarFuncionario(\"".$userData2['id_Funcionarios']."\", \"".$userData2['Nome_F']."\", \"".$userData2['Apelido_F']."\", \"".$userData2['tipo_F']."\")'>
+                            Editar</button>
+
+                            <form action='./dash.php' method='post' style='display:inline-block;'>
+                            <input type='hidden' name='idFuncionarios' value='".$userData2['id_Funcionarios']."'>
+                            <button type='submit' id='btnApagar' class='btnOperacoes' name='btnApagarFuncionarios'>
+                                Apagar
+                            </button>
+                        </form>
+                        </td>";
+                        
+                        echo "</tr>";
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
@@ -239,6 +477,7 @@ a{
             <table class="table">
                     <thead>
                         <tr>
+                            <th scope="col">id</th>
                             <th scope="col">Nome</th>
                             <th scope="col">Apelido</th>
                             <th scope="col">Contacto</th>
@@ -253,10 +492,19 @@ a{
                             while($userData=mysqli_fetch_assoc($resultClientes))
                             {
                                 echo "<tr>";
+                                echo "<td>".$userData['id_Clientes']."</td>";
                                 echo "<td>".$userData['Nome_C']."</td>";
                                 echo "<td>".$userData['Apelido_C']."</td>";
                                 echo "<td>".$userData['Contacto_C']."</td>";
                                 echo "<td>".$userData['Senha_C']."</td>";
+                                echo "<td> 
+                                <form action='./dash.php' method='post' style='display:inline-block;'>
+                                    <input type='hidden' name='id_Clientes' value='".$userData['id_Clientes']."'>
+                                    <button type='submit' id='btnApagar' class='btnOperacoes' name='btnApagarClientes'>
+                                        Apagar
+                                    </button>
+                                 </form>
+                                </td>";
                                 echo "</tr>";
                             }
                          ?>
@@ -269,10 +517,14 @@ a{
          </div>
         <div id="corte-tabl"  class="esconderDivCorte">
             <h2 id="corte">Serviços</h2>
-            <button class="btnCorInserir" onclick="abrirDivAlterarCorte()">Inserir Serviço</button>
+            <a href="../formularios/servicos.php">
+                <button class="btnCorInserir">Inserir Serviço</button>
+            </a>
+            
             <table>
                 <thead>
                     <tr>
+                        <th>id</th>
                         <th>Serviço</th>
                         <th>Preço</th>
                         <th>Tempo</th>
@@ -281,16 +533,29 @@ a{
                 </thead>
                 <tbody>
                 <?php
-                      echo "<tr>";
-                      echo "<td>
-                      <a class='btn btn-primary' href='#'>
-                    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pen-fill' viewBox='0 0 16 16' onclick='abrirDivAlterarCorte()'>
-                        <path d='m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001'/>
-                    </svg>
-                    </a>
-                  </td>";
-                      echo "</tr>";
-                   ?>
+                     while($userData3=mysqli_fetch_assoc($resultServicos))
+                     {
+                         echo "<tr>";
+                         echo "<td>".$userData3['id_Servicos']."</td>";
+                         echo "<td>".$userData3['nome_S']."</td>";
+                         echo "<td>".$userData3['preco']."</td>";
+                         echo "<td>".$userData3['tempo']."</td>";
+                         echo "<td>
+                         <button class='btnOperacoes' id='btnEditar' onclick='abrirDivAlterarCorte(\"".$userData3['id_Servicos']."\", \"".$userData3['nome_S']."\", \"".$userData3['preco']."\", \"".$userData3['tempo']."\")'>
+                             Editar</button>
+ 
+                             <form action='./dash.php' method='post' style='display:inline-block;'>
+                             <input type='hidden' name='idServicos' value='".$userData3['id_Servicos']."'>
+                             <button type='submit' id='btnApagar' class='btnOperacoes' name='btnApagarServico'>
+                                 Apagar
+                             </button>
+                         </form>
+                         </td>";
+                         
+                         echo "</tr>";
+                     }
+                      
+                 ?>
                 </tbody>
             </table>
         </div>
@@ -301,15 +566,17 @@ a{
 
         <p>ALTERAÇÃO DOS DADOS DO GERENTE</p>
 
-        <form action="#"  method="#" class="containerFormAlterar">
+        <form action="./dash.php"  method="post" class="containerFormAlterar">
 
-            <input type="text" placeholder="" name="inputNome" class="inputsFormAlterar">
-            <input type="text" placeholder="" name="inputApelido" class="inputsFormAlterar">
-            <input type="text" placeholder="" name="inputContacto" class="inputsFormAlterar">
-            <input type="text" placeholder="" name="inputSenha" class="inputsFormAlterar">
+           
+            <input type="text" name="idGerente" id="inputID" placeholder="id" class="inputsFormAlterar" readonly>
+            <input type="text" placeholder="Nome" name="inputNome" class="inputsFormAlterar">
+            <input type="text" placeholder="Apelido" name="inputApelido" class="inputsFormAlterar">
+            <input type="text" placeholder="Contacto" name="inputContacto" class="inputsFormAlterar">
+            <input type="text" placeholder="Senha" name="inputSenha" class="inputsFormAlterar">
             
             <div class="containerButoes">
-                <button class="btnCorAzul">Alterar</button>
+                <button class="btnCorAzul" type="submit" name="btnAlterarGerente">Alterar</button>
                 <button class="btnCorVermelho" onclick="fecharDivAlterarGerente()">Fechar</button>
             </div>
               
@@ -324,15 +591,16 @@ a{
 
         <p>ALTERAÇÃO DOS DADOS DO FUNCIONARIO</p>
 
-        <form action="#"  method="#" class="containerFormAlterar">
+        <form action="./dash.php"  method="post" class="containerFormAlterar">
 
-            <input type="text" placeholder="" name="inputNome" class="inputsFormAlterar">
-            <input type="text" placeholder="" name="inputApelido" class="inputsFormAlterar">
-            <input type="text" placeholder="" name="inputContacto" class="inputsFormAlterar">
-            <input type="text" placeholder="" name="inputSenha" class="inputsFormAlterar">
+            <input type="text" id="inputIDF" placeholder="id" name="inputID" class="inputsFormAlterar" readonly>
+            <input type="text" id="inputNome" placeholder="nome" name="inputNome" class="inputsFormAlterar">
+            <input type="text" id="inputApelido" placeholder="apelido" name="inputApelido" class="inputsFormAlterar">
+            <input type="text" id="inputTipo" placeholder="tipo" name="inputTipo" class="inputsFormAlterar">
+      
             
             <div class="containerButoes">
-                <button class="btnCorAzul">Alterar</button>
+                <button class="btnCorAzul" type="submit" name="btnAlterarFuncionario">Alterar</button>
                 <button class="btnCorVermelho" onclick="fecharDivAlterarFuncionario()">Fechar</button>
             </div>
               
@@ -347,15 +615,15 @@ a{
 
         <p>ALTERAÇÃO DOS DADOS DE CORTE</p>
 
-        <form action="#"  method="#" class="containerFormAlterar">
+        <form action="./dash.php"  method="post" class="containerFormAlterar">
 
-            <input type="text" placeholder="" name="inputServicoCabeloPenteado" class="inputsFormAlterar">
-            <input type="text" placeholder="" name="inputServicoManicurePedicure" class="inputsFormAlterar">
-            <input type="text" placeholder="" name="inputPreco" class="inputsFormAlterar">
-            <input type="text" placeholder="" name="inputTempo" class="inputsFormAlterar">
+            <input type="text" id="inputIDS" placeholder="id" name="inputIDS" class="inputsFormAlterar" readonly>
+            <input type="text" id="inputServico" placeholder="Serviço" name="inputServico" class="inputsFormAlterar">
+            <input type="text" id="inputPreco" placeholder="Preço" name="inputPreco" class="inputsFormAlterar">
+            <input type="text" id="inputTempo" placeholder="Tempo" name="inputTempo" class="inputsFormAlterar">
             
             <div class="containerButoes">
-                <button class="btnCorAzul">Alterar</button>
+                <button class="btnCorAzul" type="submit" name="btnAlterarServico">Alterar</button>
                 <button class="btnCorVermelho" onclick="fecharDivAlterarCorte()">Fechar</button>
             </div>
               
@@ -372,8 +640,15 @@ a{
                 document.getElementById('containerAlterar').style.display = 'none';
             }
 
-            function abrirDivAlterarGerente(){
+            function abrirDivAlterarGerente(id,nome, apelido, contacto,senha){
                 document.getElementById('containerAlterar').style.display = 'flex';
+
+                //let valorID= document.getElementById('lblid').innerText = id;
+                document.getElementById('inputID').value=id
+                document.querySelector('input[name="inputNome"]').value = nome;
+                document.querySelector('input[name="inputApelido"]').value = apelido;
+                document.querySelector('input[name="inputContacto"]').value = contacto;
+                document.querySelector('input[name="inputSenha"]').value = senha;
 
             }
 
@@ -381,17 +656,25 @@ a{
                 document.getElementById('containerAlterarFuncionario').style.display = 'none';
             }
 
-            function abrirDivAlterarFuncionario(){
+            function abrirDivAlterarFuncionario(id,nome,apelido,tipo){
                 document.getElementById('containerAlterarFuncionario').style.display = 'flex';
-
+                
+                document.getElementById('inputIDF').value = id;
+                document.getElementById('inputNome').value = nome;
+                document.getElementById('inputApelido').value = apelido;
+                document.getElementById('inputTipo').value = tipo;
             }
 
             function fecharDivAlterarCorte(){
                 document.getElementById('containerAlterarCorte').style.display = 'none';
             }
 
-            function abrirDivAlterarCorte(){
+            function abrirDivAlterarCorte(id,servico,preco,tempo){
                 document.getElementById('containerAlterarCorte').style.display = 'flex';
+                document.getElementById('inputIDS').value = id;
+                document.getElementById('inputServico').value = servico;
+                document.getElementById('inputPreco').value = preco;
+                document.getElementById('inputTempo').value = tempo;
             }
 
             function mostrarContainerCortes()

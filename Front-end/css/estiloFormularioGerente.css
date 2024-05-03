@@ -45,9 +45,21 @@ input[type="submit"] {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
+    font-weight: bold;
     cursor: pointer;
 }
 input[type="submit"]:hover {
     background-color: #1F1CB3;
+}
+
+button{
+    width: 60%;
+    height: 5vh;
+    background-color: #6265b3;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
 }
     
