@@ -1,0 +1,106 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body{
+    background-image: linear-gradient(to left,#1F1CB3,#6265b3);
+}
+
+h1{
+    text-align: center;
+    margin-top: 20px;
+    color: white;
+}
+
+p{
+    color: black;
+    text-align: center;
+    font-weight: bold;
+
+}
+
+h2{
+    font-size: 10em;
+}
+
+button{
+    width: 15%;
+    height: 5vh;
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    color: black;
+    margin: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    }
+
+.containerImagem{
+    
+    display: flex;
+    justify-content: center;
+}
+
+ 
+
+
+.containerDashShows{
+    width: 100%;
+    height: 230px;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px
+}
+
+.containerDashInformation{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    margin-left: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-right: 20px;
+}
+
+.secundaryDashInformation{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilizando tabelas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+   
+    
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: white; 
+    color: black; 
+}
+
+tr:hover {
+    background-color: #f2f2f2;
+}
+
+.tabela-Marcacação{
+    padding: 10px;
+}

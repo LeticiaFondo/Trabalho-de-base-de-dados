@@ -359,6 +359,8 @@ a{
     background-color: red;
 }
 
+ 
+
 </style>
 
  
@@ -373,14 +375,16 @@ a{
             <li><i class="fas fa-user sidebar-icon"></i><a  class="sidebar-text">Gerente</a></li>
             <li><i class="fas fa-users sidebar-icon"></i><a class="sidebar-text" onclick="mostrarClientes()">Cliente</a></li>
             <li><i class="fas fa-users-cog sidebar-icon"></i><a   class="sidebar-text" onclick="mostrarFuncionarios()">Funcionários</a></li>
+            <li><i class="fas fa-users-cog sidebar-icon"></i><a  href="../html/marcacaodash.php"  class="sidebar-text" onclick="">Marcação</a></li>
             <li><i class="fas fa-cut sidebar-icon"></i><a  class="sidebar-text" onclick="mostrarContainerCortes()">Serviços</a></li>
             <li><i class="fas fa-sign-out-alt sidebar-icon"></i><a href="../html/index.php" class="sidebar-text">Sair</a></li>
         </ul>
     </div>
     <div id="content">
         
-        <h2 id="gerente">Gerente</h2>
-       <div class="containerGerente">
+     
+       <div class="containerGerente" id="containerGerente">
+             <h2 id="gerente">Gerente</h2>
          <a href="../formularios/gerente.php">
              <button class="btnCorInserir">Inserir Gerente</button>
          </a>
@@ -680,7 +684,12 @@ a{
             function mostrarContainerCortes()
             {
                 document.getElementById('corte-tabl').style.display='block'
+                 
+                 
+
             }
+
+           
     </script>
 </body>
 </html>
